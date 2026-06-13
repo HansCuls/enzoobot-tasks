@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>EnzooBot — Tugas Hard</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Segoe UI',sans-serif;background:linear-gradient(135deg,#0f0f1a,#1a1a2e,#16213e);min-height:100vh;display:flex;align-items:center;justify-content:center;color:#fff}
+.card{background:rgba(255,255,255,.06);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.1);border-radius:24px;padding:44px 36px;max-width:380px;width:92%;text-align:center;box-shadow:0 30px 60px rgba(0,0,0,.4)}
+.badge{display:inline-block;background:#f44336;color:#fff;padding:6px 20px;border-radius:20px;font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:22px}
+h1{font-size:26px;font-weight:700;margin-bottom:6px}
+.sub{color:rgba(255,255,255,.5);font-size:13px;margin-bottom:32px}
+.ring-wrap{position:relative;width:140px;height:140px;margin:0 auto 28px}
+.ring-wrap svg{transform:rotate(-90deg)}
+circle{fill:none;stroke-width:9}
+.bg{stroke:rgba(255,255,255,.08)}
+.prog{stroke:#f44336;stroke-linecap:round;stroke-dasharray:408;stroke-dashoffset:0;transition:stroke-dashoffset 1s linear}
+.num{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:38px;font-weight:700}
+.bar{background:rgba(255,255,255,.08);border-radius:8px;height:7px;margin-bottom:28px;overflow:hidden}
+.fill{height:100%;background:#f44336;border-radius:8px;transition:width 1s linear}
+.done-msg{color:#f44336;font-size:16px;font-weight:600;margin-bottom:20px;display:none}
+.btn{display:inline-block;width:100%;padding:15px;border-radius:14px;font-size:15px;font-weight:700;text-decoration:none;border:none;cursor:pointer;transition:all .25s}
+.off{background:rgba(255,255,255,.08);color:rgba(255,255,255,.25);pointer-events:none}
+.on{background:linear-gradient(135deg,#f44336,#f44336bb);color:#fff;box-shadow:0 6px 24px #f4433655}
+.on:hover{transform:translateY(-2px);box-shadow:0 10px 30px #f4433677}
+.hint{margin-top:16px;font-size:12px;color:rgba(255,255,255,.35)}
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="badge">🔴 Hard</div>
+  <h1>Tugas Menunggu</h1>
+  <p class="sub">Tetap di halaman ini sampai waktu habis</p>
+  <div class="ring-wrap">
+    <svg width="140" height="140">
+      <circle class="bg" cx="70" cy="70" r="65"/>
+      <circle class="prog" id="ring" cx="70" cy="70" r="65"/>
+    </svg>
+    <div class="num" id="num">15</div>
+  </div>
+  <div class="bar"><div class="fill" id="fill"></div></div>
+  <p class="done-msg" id="done">✅ Waktu habis! Klik tombol verifikasi!</p>
+  <a href="https://t.me/enzo_gacha_bot?start=tugas_5FtkeSBwctnxmVr3eD1SOdj90M" class="btn off" id="btn">🔒 Verifikasi Tugas</a>
+  <p class="hint">Hadiah poin menanti setelah verifikasi</p>
+</div>
+<script>
+const total=15,ring=document.getElementById('ring'),num=document.getElementById('num'),fill=document.getElementById('fill'),btn=document.getElementById('btn'),done=document.getElementById('done'),circ=408;
+let rem=total;
+const iv=setInterval(()=>{
+  rem--;
+  num.textContent=rem;
+  ring.style.strokeDashoffset=circ-(circ*rem/total);
+  fill.style.width=(rem/total*100)+'%';
+  if(rem<=0){
+    clearInterval(iv);
+    num.textContent='✓';
+    fill.style.width='0%';
+    btn.className='btn on';
+    btn.textContent='✅ Verifikasi Tugas';
+    done.style.display='block';
+  }
+},1000);
+</script>
+</body>
+</html>
